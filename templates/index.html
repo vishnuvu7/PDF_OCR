@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlimited-OCR &middot; PDF Reader</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>PDF OCR</h1>
+      <p class="subtitle">
+        Upload a PDF or image and extract its contents with
+        <a href="https://github.com/baidu/Unlimited-OCR" target="_blank" rel="noopener">Unlimited-OCR</a>.
+      </p>
+      <div id="gpu-status" class="gpu-status" hidden></div>
+    </header>
+
+    <section id="drop-zone" class="drop-zone">
+      <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg" hidden />
+      <div class="drop-zone-inner">
+        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 16V4m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round"/>
+        </svg>
+        <p><strong>Drop a file here</strong> or click to browse</p>
+        <p class="hint">PDF, PNG or JPG &middot; up to 100 MB</p>
+      </div>
+    </section>
+
+    <div id="selected-file" class="selected-file" hidden>
+      <span id="selected-file-name"></span>
+      <button id="clear-file" class="btn-link" type="button">remove</button>
+    </div>
+
+    <button id="run-btn" class="btn-primary" type="button" disabled>Run OCR</button>
+
+    <div id="spinner" class="spinner-wrap" hidden>
+      <div class="spinner"></div>
+      <p id="spinner-text">Running OCR&hellip; this can take a while for multi-page documents.</p>
+    </div>
+
+    <div id="error-banner" class="error-banner" hidden></div>
+
+    <section id="result-section" class="result-section" hidden>
+      <div class="result-header">
+        <h2>Result</h2>
+        <div class="result-meta" id="result-meta"></div>
+        <div class="result-actions">
+          <button id="toggle-raw" class="btn-secondary" type="button">View raw</button>
+          <button id="download-btn" class="btn-secondary" type="button">Download .md</button>
+        </div>
+      </div>
+      <article id="result-rendered" class="markdown-body"></article>
+      <pre id="result-raw" class="raw-output" hidden></pre>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
